@@ -82,7 +82,10 @@ data/*.json
 *.swo
 *~.nib
 
-# JavaFX (keep SDK but ignore downloads)
+# JavaFX SDK (too large for GitHub - download separately)
+javafx/javafx-sdk-*/
+
+# JavaFX downloads
 javafx/*.zip
 javafx/*.tar.gz
 
