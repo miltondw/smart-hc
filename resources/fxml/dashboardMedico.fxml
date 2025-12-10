@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
+           fx:controller="controllers.DashboardMedicoController" styleClass="dashboard">
+    
+    <!-- Header -->
+    <top>
+        <HBox styleClass="header" alignment="CENTER_LEFT" spacing="20">
+            <padding>
+                <Insets top="15" right="20" bottom="15" left="20"/>
+            </padding>
+            
+            <Label text="SMART HC - Dashboard Médico" styleClass="header-title">
+                <font>
+                    <Font name="System Bold" size="20"/>
+                </font>
+            </Label>
+            
+            <Region HBox.hgrow="ALWAYS"/>
+            
+            <Label fx:id="lblMedicoNombre" text="Dr. [Nombre]" styleClass="user-label">
+                <font>
+                    <Font size="14"/>
+                </font>
+            </Label>
+            
+            <Button text="Cerrar Sesión" onAction="#cerrarSesion" styleClass="btn-logout"/>
+        </HBox>
+    </top>
+    
+    <!-- Centro - Contenido principal -->
+    <center>
+        <VBox spacing="20" styleClass="content">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            
+            <!-- Estadísticas -->
+            <HBox spacing="20" alignment="CENTER">
+                <VBox styleClass="stat-card" alignment="CENTER" spacing="10" HBox.hgrow="ALWAYS">
+                    <padding>
+                        <Insets top="20" right="20" bottom="20" left="20"/>
+                    </padding>
+                    <Label fx:id="lblTotalPacientes" text="0" styleClass="stat-number">
+                        <font>
+                            <Font name="System Bold" size="32"/>
+                        </font>
+                    </Label>
+                    <Label text="Total Pacientes" styleClass="stat-label"/>
+                </VBox>
+                
+                <VBox styleClass="stat-card" alignment="CENTER" spacing="10" HBox.hgrow="ALWAYS">
+                    <padding>
+                        <Insets top="20" right="20" bottom="20" left="20"/>
+                    </padding>
+                    <Label fx:id="lblHistoriasCompletas" text="0" styleClass="stat-number">
+                        <font>
+                            <Font name="System Bold" size="32"/>
+                        </font>
+                    </Label>
+                    <Label text="Historias Completas" styleClass="stat-label"/>
+                </VBox>
+                
+                <VBox styleClass="stat-card" alignment="CENTER" spacing="10" HBox.hgrow="ALWAYS">
+                    <padding>
+                        <Insets top="20" right="20" bottom="20" left="20"/>
+                    </padding>
+                    <Label fx:id="lblSeguimientosActivos" text="0" styleClass="stat-number">
+                        <font>
+                            <Font name="System Bold" size="32"/>
+                        </font>
+                    </Label>
+                    <Label text="Seguimientos Activos" styleClass="stat-label"/>
+                </VBox>
+            </HBox>
+            
+            <!-- Acciones principales -->
+            <VBox spacing="15">
+                <Label text="Acciones Principales" styleClass="section-title">
+                    <font>
+                        <Font name="System Bold" size="18"/>
+                    </font>
+                </Label>
+                
+                <HBox spacing="15">
+                    <Button text="Ver Pacientes" onAction="#verPacientes" 
+                           prefWidth="200" prefHeight="50" styleClass="btn-action"/>
+                    <Button text="Historias Clínicas" onAction="#verHistorias" 
+                           prefWidth="200" prefHeight="50" styleClass="btn-action"/>
+                    <Button text="Seguimientos Crónicos" onAction="#verSeguimientos" 
+                           prefWidth="200" prefHeight="50" styleClass="btn-action"/>
+                </HBox>
+            </VBox>
+            
+            <!-- Lista de pacientes -->
+            <VBox spacing="10" VBox.vgrow="ALWAYS">
+                <Label text="Pacientes Recientes" styleClass="section-title">
+                    <font>
+                        <Font name="System Bold" size="18"/>
+                    </font>
+                </Label>
+                
+                <TableView fx:id="tablaPacientes" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colNombre" text="Nombre Completo" prefWidth="250"/>
+                        <TableColumn fx:id="colHistoriaClinica" text="N° Historia" prefWidth="120"/>
+                        <TableColumn fx:id="colEdad" text="Edad" prefWidth="80"/>
+                        <TableColumn fx:id="colCiudad" text="Ciudad" prefWidth="150"/>
+                        <TableColumn fx:id="colPorcentaje" text="% Completado" prefWidth="120"/>
+                        <TableColumn fx:id="colAcciones" text="Acciones" prefWidth="150"/>
+                    </columns>
+                </TableView>
+            </VBox>
+        </VBox>
+    </center>
+    
+</BorderPane>

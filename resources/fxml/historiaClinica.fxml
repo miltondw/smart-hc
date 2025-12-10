@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
+           fx:controller="controllers.HistoriaClinicaController" styleClass="dashboard">
+    
+    <!-- Header -->
+    <top>
+        <HBox styleClass="header" alignment="CENTER_LEFT" spacing="20">
+            <padding>
+                <Insets top="15" right="20" bottom="15" left="20"/>
+            </padding>
+            
+            <Button text="← Volver" onAction="#volver" styleClass="btn-back"/>
+            
+            <Label text="Historia Clínica" styleClass="header-title">
+                <font>
+                    <Font name="System Bold" size="20"/>
+                </font>
+            </Label>
+            
+            <Region HBox.hgrow="ALWAYS"/>
+            
+            <Label fx:id="lblPacienteInfo" text="Paciente: [Nombre]" styleClass="user-label">
+                <font>
+                    <Font size="14"/>
+                </font>
+            </Label>
+        </HBox>
+    </top>
+    
+    <!-- Centro - Formulario de Historia Clínica -->
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="content-scroll">
+            <VBox spacing="20" styleClass="content">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+                
+                <!-- Datos Personales -->
+                <VBox spacing="10" styleClass="form-section">
+                    <Label text="DATOS PERSONALES" styleClass="section-title">
+                        <font>
+                            <Font name="System Bold" size="16"/>
+                        </font>
+                    </Label>
+                    
+                    <GridPane hgap="15" vgap="10">
+                        <Label text="Dirección:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <TextField fx:id="txtDireccion" promptText="Dirección completa" 
+                                  GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="300"/>
+                        
+                        <Label text="Ciudad:" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                        <TextField fx:id="txtCiudad" promptText="Ciudad" 
+                                  GridPane.rowIndex="0" GridPane.columnIndex="3" prefWidth="200"/>
+                        
+                        <Label text="Tipo de Sangre:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="cmbTipoSangre" promptText="Seleccionar" 
+                                 GridPane.rowIndex="1" GridPane.columnIndex="1" prefWidth="150"/>
+                        
+                        <Label text="Estado Civil:" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+                        <ComboBox fx:id="cmbEstadoCivil" promptText="Seleccionar" 
+                                 GridPane.rowIndex="1" GridPane.columnIndex="3" prefWidth="150"/>
+                        
+                        <Label text="Ocupación:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <TextField fx:id="txtOcupacion" promptText="Ocupación" 
+                                  GridPane.rowIndex="2" GridPane.columnIndex="1" prefWidth="300"/>
+                        
+                        <Label text="Contacto de Emergencia:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                        <TextField fx:id="txtContactoEmergencia" promptText="Nombre completo" 
+                                  GridPane.rowIndex="3" GridPane.columnIndex="1" prefWidth="300"/>
+                        
+                        <Label text="Teléfono Emergencia:" GridPane.rowIndex="3" GridPane.columnIndex="2"/>
+                        <TextField fx:id="txtTelefonoEmergencia" promptText="Teléfono" 
+                                  GridPane.rowIndex="3" GridPane.columnIndex="3" prefWidth="200"/>
+                    </GridPane>
+                </VBox>
+                
+                <!-- Antecedentes -->
+                <VBox spacing="10" styleClass="form-section">
+                    <Label text="ANTECEDENTES" styleClass="section-title">
+                        <font>
+                            <Font name="System Bold" size="16"/>
+                        </font>
+                    </Label>
+                    
+                    <VBox spacing="5">
+                        <Label text="Enfermedades Personales:"/>
+                        <TextArea fx:id="txtEnfermedadesPersonales" promptText="Diabetes, Hipertensión, etc." 
+                                 prefRowCount="3" wrapText="true"/>
+                    </VBox>
+                    
+                    <VBox spacing="5">
+                        <Label text="Enfermedades Familiares:"/>
+                        <TextArea fx:id="txtEnfermedadesFamiliares" promptText="Antecedentes familiares" 
+                                 prefRowCount="3" wrapText="true"/>
+                    </VBox>
+                    
+                    <VBox spacing="5">
+                        <Label text="Cirugías Previas:"/>
+                        <TextArea fx:id="txtCirugias" promptText="Listar cirugías y fecha aproximada" 
+                                 prefRowCount="2" wrapText="true"/>
+                    </VBox>
+                    
+                    <VBox spacing="5">
+                        <Label text="Alergias:"/>
+                        <TextArea fx:id="txtAlergias" promptText="Medicamentos, alimentos, etc." 
+                                 prefRowCount="2" wrapText="true"/>
+                    </VBox>
+                    
+                    <VBox spacing="5">
+                        <Label text="Medicamentos Actuales:"/>
+                        <TextArea fx:id="txtMedicamentos" promptText="Medicamentos que toma actualmente" 
+                                 prefRowCount="3" wrapText="true"/>
+                    </VBox>
+                </VBox>
+                
+                <!-- Motivo de Consulta -->
+                <VBox spacing="10" styleClass="form-section">
+                    <Label text="MOTIVO DE CONSULTA" styleClass="section-title">
+                        <font>
+                            <Font name="System Bold" size="16"/>
+                        </font>
+                    </Label>
+                    
+                    <VBox spacing="5">
+                        <Label text="¿Por qué consulta hoy?"/>
+                        <TextArea fx:id="txtMotivoConsulta" promptText="Describa su motivo de consulta" 
+                                 prefRowCount="3" wrapText="true"/>
+                    </VBox>
+                    
+                    <VBox spacing="5">
+                        <Label text="Enfermedad Actual:"/>
+                        <TextArea fx:id="txtEnfermedadActual" promptText="Síntomas, duración, etc." 
+                                 prefRowCount="4" wrapText="true"/>
+                    </VBox>
+                </VBox>
+                
+                <!-- Signos Vitales -->
+                <VBox spacing="10" styleClass="form-section">
+                    <Label text="SIGNOS VITALES" styleClass="section-title">
+                        <font>
+                            <Font name="System Bold" size="16"/>
+                        </font>
+                    </Label>
+                    
+                    <GridPane hgap="15" vgap="10">
+                        <Label text="Temperatura (°C):" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <TextField fx:id="txtTemperatura" promptText="36.5" 
+                                  GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="100"/>
+                        
+                        <Label text="Presión Sistólica:" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                        <TextField fx:id="txtPresionSistolica" promptText="120" 
+                                  GridPane.rowIndex="0" GridPane.columnIndex="3" prefWidth="100"/>
+                        
+                        <Label text="Presión Diastólica:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <TextField fx:id="txtPresionDiastolica" promptText="80" 
+                                  GridPane.rowIndex="1" GridPane.columnIndex="1" prefWidth="100"/>
+                        
+                        <Label text="Frecuencia Cardíaca:" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+                        <TextField fx:id="txtFrecuenciaCardiaca" promptText="70" 
+                                  GridPane.rowIndex="1" GridPane.columnIndex="3" prefWidth="100"/>
+                        
+                        <Label text="Saturación O₂ (%):" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <TextField fx:id="txtSaturacionOxigeno" promptText="98" 
+                                  GridPane.rowIndex="2" GridPane.columnIndex="1" prefWidth="100"/>
+                        
+                        <Label text="Peso (kg):" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+                        <TextField fx:id="txtPeso" promptText="70.0" 
+                                  GridPane.rowIndex="2" GridPane.columnIndex="3" prefWidth="100"/>
+                        
+                        <Label text="Altura (m):" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                        <TextField fx:id="txtAltura" promptText="1.70" 
+                                  GridPane.rowIndex="3" GridPane.columnIndex="1" prefWidth="100"/>
+                        
+                        <Label text="IMC:" GridPane.rowIndex="3" GridPane.columnIndex="2"/>
+                        <Label fx:id="lblIMC" text="--" styleClass="imc-label"
+                              GridPane.rowIndex="3" GridPane.columnIndex="3">
+                            <font>
+                                <Font name="System Bold" size="14"/>
+                            </font>
+                        </Label>
+                    </GridPane>
+                </VBox>
+                
+                <!-- Botones de acción -->
+                <HBox spacing="15" alignment="CENTER">
+                    <Button text="Guardar Cambios" onAction="#guardarHistoria" 
+                           prefWidth="200" prefHeight="40" styleClass="btn-primary"/>
+                    <Button text="Cancelar" onAction="#volver" 
+                           prefWidth="150" prefHeight="40" styleClass="btn-secondary"/>
+                </HBox>
+                
+            </VBox>
+        </ScrollPane>
+    </center>
+    
+</BorderPane>

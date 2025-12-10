@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
+           fx:controller="controllers.DashboardPacienteController" styleClass="dashboard">
+    
+    <!-- Header -->
+    <top>
+        <HBox styleClass="header" alignment="CENTER_LEFT" spacing="20">
+            <padding>
+                <Insets top="15" right="20" bottom="15" left="20"/>
+            </padding>
+            
+            <Label text="SMART HC - Dashboard Paciente" styleClass="header-title">
+                <font>
+                    <Font name="System Bold" size="20"/>
+                </font>
+            </Label>
+            
+            <Region HBox.hgrow="ALWAYS"/>
+            
+            <Label fx:id="lblPacienteNombre" text="[Nombre Paciente]" styleClass="user-label">
+                <font>
+                    <Font size="14"/>
+                </font>
+            </Label>
+            
+            <Button text="Cerrar Sesión" onAction="#cerrarSesion" styleClass="btn-logout"/>
+        </HBox>
+    </top>
+    
+    <!-- Centro - Contenido principal -->
+    <center>
+        <VBox spacing="20" styleClass="content">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            
+            <!-- Bienvenida y progreso -->
+            <VBox spacing="15" styleClass="welcome-card">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+                
+                <Label text="¡Bienvenido a tu Historia Clínica Inteligente!" styleClass="welcome-title">
+                    <font>
+                        <Font name="System Bold" size="20"/>
+                    </font>
+                </Label>
+                
+                <Label text="Completa tu información para facilitar tu atención médica" 
+                      styleClass="welcome-subtitle"/>
+                
+                <VBox spacing="5">
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label text="Progreso de Historia Clínica:" styleClass="field-label"/>
+                        <Label fx:id="lblPorcentaje" text="0%" styleClass="progress-label">
+                            <font>
+                                <Font name="System Bold" size="14"/>
+                            </font>
+                        </Label>
+                    </HBox>
+                    <ProgressBar fx:id="progressBar" prefWidth="400" prefHeight="20"/>
+                </VBox>
+            </VBox>
+            
+            <!-- Información personal rápida -->
+            <HBox spacing="20">
+                <VBox styleClass="info-card" spacing="5" HBox.hgrow="ALWAYS">
+                    <padding>
+                        <Insets top="15" right="15" bottom="15" left="15"/>
+                    </padding>
+                    <Label text="N° Historia Clínica" styleClass="info-label"/>
+                    <Label fx:id="lblNumeroHistoria" text="HC-0000" styleClass="info-value">
+                        <font>
+                            <Font name="System Bold" size="16"/>
+                        </font>
+                    </Label>
+                </VBox>
+                
+                <VBox styleClass="info-card" spacing="5" HBox.hgrow="ALWAYS">
+                    <padding>
+                        <Insets top="15" right="15" bottom="15" left="15"/>
+                    </padding>
+                    <Label text="Edad" styleClass="info-label"/>
+                    <Label fx:id="lblEdad" text="-- años" styleClass="info-value">
+                        <font>
+                            <Font name="System Bold" size="16"/>
+                        </font>
+                    </Label>
+                </VBox>
+                
+                <VBox styleClass="info-card" spacing="5" HBox.hgrow="ALWAYS">
+                    <padding>
+                        <Insets top="15" right="15" bottom="15" left="15"/>
+                    </padding>
+                    <Label text="Última Actualización" styleClass="info-label"/>
+                    <Label fx:id="lblUltimaActualizacion" text="--/--/----" styleClass="info-value">
+                        <font>
+                            <Font name="System Bold" size="16"/>
+                        </font>
+                    </Label>
+                </VBox>
+            </HBox>
+            
+            <!-- Acciones principales -->
+            <VBox spacing="15">
+                <Label text="Gestiona tu Historia Clínica" styleClass="section-title">
+                    <font>
+                        <Font name="System Bold" size="18"/>
+                    </font>
+                </Label>
+                
+                <GridPane hgap="15" vgap="15">
+                    <Button text="Completar Datos Personales" onAction="#completarDatosPersonales" 
+                           prefWidth="250" prefHeight="60" styleClass="btn-action" 
+                           GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    
+                    <Button text="Registrar Antecedentes" onAction="#registrarAntecedentes" 
+                           prefWidth="250" prefHeight="60" styleClass="btn-action" 
+                           GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                    
+                    <Button text="Motivo de Consulta" onAction="#registrarMotivoConsulta" 
+                           prefWidth="250" prefHeight="60" styleClass="btn-action" 
+                           GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    
+                    <Button text="Signos Vitales" onAction="#registrarSignosVitales" 
+                           prefWidth="250" prefHeight="60" styleClass="btn-action" 
+                           GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                </GridPane>
+            </VBox>
+            
+            <!-- Alertas y recordatorios -->
+            <VBox spacing="10" fx:id="alertasContainer">
+                <Label text="Recordatorios" styleClass="section-title">
+                    <font>
+                        <Font name="System Bold" size="16"/>
+                    </font>
+                </Label>
+                
+                <Label fx:id="lblAlertas" text="No hay recordatorios pendientes" 
+                      styleClass="alert-info" wrapText="true"/>
+            </VBox>
+            
+        </VBox>
+    </center>
+    
+</BorderPane>
