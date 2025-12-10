@@ -36,8 +36,8 @@ public class DashboardMedicoController {
     private TableColumn<Paciente, Integer> colEdad;
     @FXML
     private TableColumn<Paciente, String> colCiudad;
-    @FXML
-    private TableColumn<Paciente, Double> colPorcentaje;
+    // @FXML
+    // private TableColumn<Paciente, Double> colPorcentaje;
     @FXML
     private TableColumn<Paciente, Void> colAcciones;
 
@@ -89,10 +89,11 @@ public class DashboardMedicoController {
         colCiudad.setCellValueFactory(
                 cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getCiudad()));
 
-        colPorcentaje.setCellValueFactory(cellData -> {
-            double porcentaje = historiaService.obtenerPorcentajeCompletado(cellData.getValue().getId());
-            return new javafx.beans.property.SimpleObjectProperty<>(porcentaje);
-        });
+        // colPorcentaje.setCellValueFactory(cellData -> {
+        // double porcentaje =
+        // historiaService.obtenerPorcentajeCompletado(cellData.getValue().getId());
+        // return new javafx.beans.property.SimpleObjectProperty<>(porcentaje);
+        // });
 
         // Agregar botón de acción
         colAcciones.setCellFactory(param -> new TableCell<>() {

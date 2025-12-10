@@ -81,25 +81,25 @@ public class DashboardPacienteController {
 
     @FXML
     private void completarDatosPersonales() {
-        abrirHistoriaClinica();
+        verHistoriaClinica();
     }
 
     @FXML
     private void registrarAntecedentes() {
-        abrirHistoriaClinica();
+        verHistoriaClinica();
     }
 
     @FXML
     private void registrarMotivoConsulta() {
-        abrirHistoriaClinica();
+        verHistoriaClinica();
     }
 
     @FXML
     private void registrarSignosVitales() {
-        abrirHistoriaClinica();
+        verHistoriaClinica();
     }
 
-    private void abrirHistoriaClinica() {
+    private void verHistoriaClinica() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/fxml/historiaClinica.fxml"));
             Parent root = loader.load();

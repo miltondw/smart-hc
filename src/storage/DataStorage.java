@@ -65,6 +65,11 @@ public class DataStorage {
             historiasClinicas = new ArrayList<>();
         if (seguimientos == null)
             seguimientos = new ArrayList<>();
+
+        // Limpiar nulos de las listas
+        usuarios.removeIf(u -> u == null);
+        historiasClinicas.removeIf(hc -> hc == null);
+        seguimientos.removeIf(s -> s == null);
     }
 
     private <T> List<T> cargarDesdeArchivo(String nombreArchivo, Type tipo) {
@@ -92,12 +97,14 @@ public class DataStorage {
     // Métodos para Usuarios
     public Optional<Usuario> buscarUsuarioPorEmail(String email) {
         return usuarios.stream()
+                .filter(u -> u != null && u.getEmail() != null)
                 .filter(u -> u.getEmail().equals(email))
                 .findFirst();
     }
 
     public Optional<Usuario> buscarUsuarioPorId(String id) {
         return usuarios.stream()
+                .filter(u -> u != null && u.getId() != null)
                 .filter(u -> u.getId().equals(id))
                 .findFirst();
     }
@@ -110,7 +117,8 @@ public class DataStorage {
 
     public boolean actualizarUsuario(Usuario usuario) {
         for (int i = 0; i < usuarios.size(); i++) {
-            if (usuarios.get(i).getId().equals(usuario.getId())) {
+            Usuario u = usuarios.get(i);
+            if (u != null && u.getId() != null && u.getId().equals(usuario.getId())) {
                 usuarios.set(i, usuario);
                 guardarEnArchivo("usuarios.json", usuarios);
                 return true;
@@ -121,7 +129,7 @@ public class DataStorage {
 
     public List<Paciente> obtenerTodosLosPacientes() {
         return usuarios.stream()
-                .filter(u -> u instanceof Paciente)
+                .filter(u -> u != null && u instanceof Paciente)
                 .map(u -> (Paciente) u)
                 .toList();
     }
