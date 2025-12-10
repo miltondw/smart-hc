@@ -1,8 +1,47 @@
 # 🚀 Guía de Instalación y Ejecución - SMART HC
 
+## 📦 Requisitos Previos
+
+- Java 21 o superior (OpenJDK recomendado)
+- JavaFX SDK 21 o superior
+- Git (para clonar el repositorio)
+
+## 🔧 Instalación de JavaFX
+
+**IMPORTANTE:** El SDK de JavaFX no está incluido en el repositorio debido a su tamaño (>100 MB).
+
+### Opción 1: Descarga Manual
+
+1. Descarga JavaFX SDK 21.0.1 desde:
+   - **Linux:** https://gluonhq.com/products/javafx/
+   
+2. Extrae el archivo en la carpeta del proyecto:
+```bash
+mkdir -p javafx
+cd javafx
+# Extrae el archivo descargado aquí
+unzip openjfx-21.0.1_linux-x64_bin-sdk.zip
+# o
+tar -xzf openjfx-21.0.1_linux-x64_bin-sdk.tar.gz
+```
+
+3. Verifica que la estructura sea:
+```
+javafx/
+└── javafx-sdk-21.0.1/
+    └── lib/
+```
+
+### Opción 2: Descarga Automática (Recomendada)
+
+Ejecuta el script de instalación:
+```bash
+./scripts/install-javafx.sh
+```
+
 ## ✅ Instalación Completada
 
-JavaFX 21 y Gson 2.10.1 ya están instalados en el proyecto.
+JavaFX 21 y Gson 2.10.1 están listos para usar.
 
 ## 📦 Estructura de Dependencias
 

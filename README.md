@@ -40,13 +40,35 @@ smart-hc/
 ## 📦 Requisitos
 
 - Java JDK 21+
-- JavaFX SDK 21
-- Gson 2.10.1
+- JavaFX SDK 21 (no incluido - ver instalación)
+- Gson 2.10.1 (incluido en `lib/`)
+
+## 🔧 Instalación
+
+1. **Clonar el repositorio**
+```bash
+git clone https://github.com/miltondw/smart-hc.git
+cd smart-hc
+```
+
+2. **Instalar JavaFX** (requerido)
+```bash
+./scripts/install-javafx.sh
+```
+
+O descarga manualmente desde [GluonHQ](https://gluonhq.com/products/javafx/) y extrae en `javafx/javafx-sdk-21.0.1/`
 
 ## 🚀 Ejecutar la Aplicación
 
+**Método rápido (compilar + ejecutar):**
 ```bash
-java --module-path /path/to/javafx-sdk/lib --add-modules javafx.controls,javafx.fxml -cp "bin:lib/*" App
+./start.sh
+```
+
+**Paso a paso:**
+```bash
+./compile.sh
+./run.sh
 ```
 
 ## 👥 Usuarios de Prueba
