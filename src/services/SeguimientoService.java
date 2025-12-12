@@ -27,6 +27,19 @@ public class SeguimientoService {
         return seguimiento;
     }
 
+    public boolean crearSeguimiento(Seguimiento seguimiento) {
+        return storage.guardarSeguimiento(seguimiento);
+    }
+
+    public Seguimiento obtenerSeguimientoActivoPorPaciente(String pacienteId) {
+        return storage.obtenerTodosLosSeguimientos().stream()
+                .filter(s -> s.getPacienteId().equals(pacienteId))
+                .filter(s -> s.isEsCronico())
+                .filter(s -> "activo".equals(s.getEstadoSeguimiento()))
+                .findFirst()
+                .orElse(null);
+    }
+
     public boolean actualizarSeguimiento(Seguimiento seguimiento) {
         return storage.actualizarSeguimiento(seguimiento);
     }

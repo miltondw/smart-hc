@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
+           fx:controller="controllers.SeguimientosCronicosController" styleClass="dashboard">
+    
+    <!-- Header -->
+    <top>
+        <HBox styleClass="header" alignment="CENTER_LEFT" spacing="20">
+            <padding>
+                <Insets top="15" right="20" bottom="15" left="20"/>
+            </padding>
+            
+            <Button text="← Volver" onAction="#volver" styleClass="btn-back"/>
+            
+            <Label text="Seguimientos Crónicos" styleClass="header-title">
+                <font>
+                    <Font name="System Bold" size="20"/>
+                </font>
+            </Label>
+            
+            <Region HBox.hgrow="ALWAYS"/>
+            
+            <Label fx:id="lblMedicoNombre" text="Dr. [Nombre]" styleClass="user-label">
+                <font>
+                    <Font size="14"/>
+                </font>
+            </Label>
+        </HBox>
+    </top>
+    
+    <!-- Centro - Lista de Pacientes Crónicos -->
+    <center>
+        <VBox spacing="20" styleClass="content">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            
+            <!-- Estadísticas -->
+            <HBox spacing="20" alignment="CENTER">
+                <VBox styleClass="stat-card" alignment="CENTER" spacing="10" HBox.hgrow="ALWAYS">
+                    <padding>
+                        <Insets top="20" right="20" bottom="20" left="20"/>
+                    </padding>
+                    <Label fx:id="lblTotalCronicos" text="0" styleClass="stat-number">
+                        <font>
+                            <Font name="System Bold" size="32"/>
+                        </font>
+                    </Label>
+                    <Label text="Pacientes Crónicos" styleClass="stat-label"/>
+                </VBox>
+                
+                <VBox styleClass="stat-card" alignment="CENTER" spacing="10" HBox.hgrow="ALWAYS">
+                    <padding>
+                        <Insets top="20" right="20" bottom="20" left="20"/>
+                    </padding>
+                    <Label fx:id="lblCitasProximas" text="0" styleClass="stat-number">
+                        <font>
+                            <Font name="System Bold" size="32"/>
+                        </font>
+                    </Label>
+                    <Label text="Citas Próximas" styleClass="stat-label"/>
+                </VBox>
+            </HBox>
+            
+            <!-- Tabla de Pacientes Crónicos -->
+            <VBox spacing="10" VBox.vgrow="ALWAYS">
+                <Label text="Lista de Pacientes con Seguimiento Crónico" styleClass="section-title">
+                    <font>
+                        <Font name="System Bold" size="18"/>
+                    </font>
+                </Label>
+                
+                <TableView fx:id="tablaSeguimientos" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colPaciente" text="Paciente" prefWidth="200"/>
+                        <TableColumn fx:id="colDiagnostico" text="Diagnóstico" prefWidth="250"/>
+                        <TableColumn fx:id="colTratamiento" text="Tratamiento" prefWidth="200"/>
+                        <TableColumn fx:id="colProximaCita" text="Próxima Cita" prefWidth="120"/>
+                        <TableColumn fx:id="colEstado" text="Estado" prefWidth="100"/>
+                        <TableColumn fx:id="colAcciones" text="Acciones" prefWidth="150"/>
+                    </columns>
+                </TableView>
+            </VBox>
+        </VBox>
+    </center>
+    
+</BorderPane>

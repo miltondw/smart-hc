@@ -5,7 +5,6 @@ import java.time.LocalDate;
 public class Paciente extends Usuario {
     private String numeroHistoriaClinica;
     private LocalDate fechaNacimiento;
-    private String tipoSangre;
     private String direccion;
     private String ciudad;
     private String genero;
@@ -13,8 +12,6 @@ public class Paciente extends Usuario {
     private String ocupacion;
     private String contactoEmergencia;
     private String telefonoEmergencia;
-    private double peso;
-    private double altura;
 
     public Paciente() {
         super();
@@ -47,14 +44,6 @@ public class Paciente extends Usuario {
         if (fechaNacimiento == null)
             return 0;
         return LocalDate.now().getYear() - fechaNacimiento.getYear();
-    }
-
-    public String getTipoSangre() {
-        return tipoSangre;
-    }
-
-    public void setTipoSangre(String tipoSangre) {
-        this.tipoSangre = tipoSangre;
     }
 
     public String getDireccion() {
@@ -111,28 +100,5 @@ public class Paciente extends Usuario {
 
     public void setTelefonoEmergencia(String telefonoEmergencia) {
         this.telefonoEmergencia = telefonoEmergencia;
-    }
-
-    public double getPeso() {
-        return peso;
-    }
-
-    public void setPeso(double peso) {
-        this.peso = peso;
-    }
-
-    public double getAltura() {
-        return altura;
-    }
-
-    public void setAltura(double altura) {
-        this.altura = altura;
-    }
-
-    public double getIMC() {
-        if (peso > 0 && altura > 0) {
-            return peso / (altura * altura);
-        }
-        return 0;
     }
 }

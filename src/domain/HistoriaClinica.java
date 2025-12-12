@@ -12,6 +12,8 @@ public class HistoriaClinica {
     private Antecedentes antecedentes;
     private String motivoConsulta;
     private String enfermedadActual;
+    private String diagnostico;
+    private String nivelRiesgo; // BAJO, MEDIO, ALTO
     private List<SignosVitales> signosVitales;
     private List<String> adjuntos;
     private List<Seguimiento> seguimientos;
@@ -172,5 +174,23 @@ public class HistoriaClinica {
 
     public void setCompletada(boolean completada) {
         this.completada = completada;
+    }
+
+    public String getDiagnostico() {
+        return diagnostico;
+    }
+
+    public void setDiagnostico(String diagnostico) {
+        this.diagnostico = diagnostico;
+        this.fechaActualizacion = LocalDateTime.now();
+    }
+
+    public String getNivelRiesgo() {
+        return nivelRiesgo;
+    }
+
+    public void setNivelRiesgo(String nivelRiesgo) {
+        this.nivelRiesgo = nivelRiesgo;
+        this.fechaActualizacion = LocalDateTime.now();
     }
 }

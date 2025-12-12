@@ -56,7 +56,8 @@ public class DashboardPacienteController {
 
         historiaClinica = historiaService.obtenerHistoriaClinica(pacienteActual.getId());
 
-        double porcentaje = historiaClinica.getPorcentajeCompletado();
+        // Calcular el porcentaje actualizado
+        double porcentaje = historiaService.obtenerPorcentajeCompletado(pacienteActual.getId());
         lblPorcentaje.setText(String.format("%.0f%%", porcentaje));
         progressBar.setProgress(porcentaje / 100.0);
 
@@ -81,31 +82,31 @@ public class DashboardPacienteController {
 
     @FXML
     private void completarDatosPersonales() {
-        verHistoriaClinica();
+        abrirHistoriaClinica("datos");
     }
 
     @FXML
     private void registrarAntecedentes() {
-        verHistoriaClinica();
+        abrirHistoriaClinica("antecedentes");
     }
 
     @FXML
     private void registrarMotivoConsulta() {
-        verHistoriaClinica();
+        abrirHistoriaClinica("motivo");
     }
 
     @FXML
     private void registrarSignosVitales() {
-        verHistoriaClinica();
+        abrirHistoriaClinica("signos");
     }
 
-    private void verHistoriaClinica() {
+    private void abrirHistoriaClinica(String seccion) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/fxml/historiaClinica.fxml"));
             Parent root = loader.load();
 
             HistoriaClinicaController controller = loader.getController();
-            controller.cargarPaciente(pacienteActual);
+            controller.cargarPaciente(pacienteActual, seccion);
 
             Scene scene = new Scene(root, AppConfig.WINDOW_WIDTH, AppConfig.WINDOW_HEIGHT);
             scene.getStylesheets().add(getClass().getResource("/resources/css/styles.css").toExternalForm());

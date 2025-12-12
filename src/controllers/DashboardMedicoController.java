@@ -36,10 +36,14 @@ public class DashboardMedicoController {
     private TableColumn<Paciente, Integer> colEdad;
     @FXML
     private TableColumn<Paciente, String> colCiudad;
-    // @FXML
-    // private TableColumn<Paciente, Double> colPorcentaje;
+    @FXML
+    private TableColumn<Paciente, Double> colPorcentaje;
+    @FXML
+    private TableColumn<Paciente, String> colRiesgo;
     @FXML
     private TableColumn<Paciente, Void> colAcciones;
+    @FXML
+    private ComboBox<String> cmbFiltroRiesgo;
 
     private AuthService authService;
     private HistoriaClinicaService historiaService;
@@ -60,6 +64,7 @@ public class DashboardMedicoController {
 
         if (medicoActual != null) {
             lblMedicoNombre.setText("Dr. " + medicoActual.getNombreCompleto());
+            configurarFiltros();
             cargarEstadisticas();
             configurarTabla();
             cargarPacientes();
@@ -89,11 +94,19 @@ public class DashboardMedicoController {
         colCiudad.setCellValueFactory(
                 cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getCiudad()));
 
-        // colPorcentaje.setCellValueFactory(cellData -> {
-        // double porcentaje =
-        // historiaService.obtenerPorcentajeCompletado(cellData.getValue().getId());
-        // return new javafx.beans.property.SimpleObjectProperty<>(porcentaje);
-        // });
+        colPorcentaje.setCellValueFactory(cellData -> {
+            double porcentaje = historiaService.obtenerPorcentajeCompletado(cellData.getValue().getId());
+            return new javafx.beans.property.SimpleObjectProperty<>(porcentaje);
+        });
+
+        colRiesgo.setCellValueFactory(cellData -> {
+            String pacienteId = cellData.getValue().getId();
+            HistoriaClinica historia = historiaService.obtenerHistoriaPorPaciente(pacienteId);
+            String riesgo = (historia != null && historia.getNivelRiesgo() != null)
+                    ? historia.getNivelRiesgo()
+                    : "Sin clasificar";
+            return new javafx.beans.property.SimpleStringProperty(riesgo);
+        });
 
         // Agregar botón de acción
         colAcciones.setCellFactory(param -> new TableCell<>() {
@@ -134,9 +147,18 @@ public class DashboardMedicoController {
 
     @FXML
     private void verSeguimientos() {
-        List<Seguimiento> seguimientos = seguimientoService.obtenerSeguimientosCronicos();
-        AlertUtils.mostrarInfo("Seguimientos Crónicos",
-                "Pacientes con seguimiento activo: " + seguimientos.size());
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/fxml/seguimientosCronicos.fxml"));
+            Parent root = loader.load();
+
+            Scene scene = new Scene(root, AppConfig.WINDOW_WIDTH, AppConfig.WINDOW_HEIGHT);
+            scene.getStylesheets().add(getClass().getResource("/resources/css/styles.css").toExternalForm());
+
+            Stage stage = (Stage) tablaPacientes.getScene().getWindow();
+            stage.setScene(scene);
+        } catch (IOException e) {
+            AlertUtils.mostrarError("Error", "No se pudo cargar la vista de seguimientos: " + e.getMessage());
+        }
     }
 
     private void verHistoriaClinica(Paciente paciente) {
@@ -155,6 +177,32 @@ public class DashboardMedicoController {
         } catch (IOException e) {
             AlertUtils.mostrarError("Error", "No se pudo cargar la historia clínica: " + e.getMessage());
         }
+    }
+
+    private void configurarFiltros() {
+        cmbFiltroRiesgo.setItems(FXCollections.observableArrayList(
+                "TODOS", "BAJO", "MEDIO", "ALTO", "Sin clasificar"));
+        cmbFiltroRiesgo.setValue("TODOS");
+    }
+
+    @FXML
+    private void filtrarPorRiesgo() {
+        String filtro = cmbFiltroRiesgo.getValue();
+        List<Paciente> pacientes = storage.obtenerTodosLosPacientes();
+
+        if (filtro != null && !filtro.equals("TODOS")) {
+            pacientes = pacientes.stream()
+                    .filter(p -> {
+                        HistoriaClinica historia = historiaService.obtenerHistoriaPorPaciente(p.getId());
+                        if (filtro.equals("Sin clasificar")) {
+                            return historia == null || historia.getNivelRiesgo() == null;
+                        }
+                        return historia != null && filtro.equals(historia.getNivelRiesgo());
+                    })
+                    .toList();
+        }
+
+        tablaPacientes.setItems(FXCollections.observableArrayList(pacientes));
     }
 
     @FXML

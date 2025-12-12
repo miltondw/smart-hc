@@ -14,6 +14,7 @@ public class SignosVitales {
     private double saturacionOxigeno; // porcentaje
     private double peso; // kg
     private double altura; // metros
+    private String tipoSangre; // Tipo de sangre
     private String observaciones;
 
     public SignosVitales() {
@@ -135,6 +136,14 @@ public class SignosVitales {
 
     public void setAltura(double altura) {
         this.altura = altura;
+    }
+
+    public String getTipoSangre() {
+        return tipoSangre;
+    }
+
+    public void setTipoSangre(String tipoSangre) {
+        this.tipoSangre = tipoSangre;
     }
 
     public String getObservaciones() {

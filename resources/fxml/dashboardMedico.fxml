@@ -99,20 +99,33 @@
             
             <!-- Lista de pacientes -->
             <VBox spacing="10" VBox.vgrow="ALWAYS">
-                <Label text="Pacientes Recientes" styleClass="section-title">
-                    <font>
-                        <Font name="System Bold" size="18"/>
-                    </font>
-                </Label>
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <Label text="Pacientes Recientes" styleClass="section-title">
+                        <font>
+                            <Font name="System Bold" size="18"/>
+                        </font>
+                    </Label>
+                    
+                    <Region HBox.hgrow="ALWAYS"/>
+                    
+                    <Label text="Filtrar por Riesgo:">
+                        <font>
+                            <Font size="14"/>
+                        </font>
+                    </Label>
+                    
+                    <ComboBox fx:id="cmbFiltroRiesgo" prefWidth="150" onAction="#filtrarPorRiesgo"/>
+                </HBox>
                 
                 <TableView fx:id="tablaPacientes" VBox.vgrow="ALWAYS">
                     <columns>
-                        <TableColumn fx:id="colNombre" text="Nombre Completo" prefWidth="250"/>
-                        <TableColumn fx:id="colHistoriaClinica" text="N° Historia" prefWidth="120"/>
-                        <TableColumn fx:id="colEdad" text="Edad" prefWidth="80"/>
-                        <TableColumn fx:id="colCiudad" text="Ciudad" prefWidth="150"/>
-                        <TableColumn fx:id="colPorcentaje" text="% Completado" prefWidth="120"/>
-                        <TableColumn fx:id="colAcciones" text="Acciones" prefWidth="150"/>
+                        <TableColumn fx:id="colNombre" text="Nombre Completo" prefWidth="200"/>
+                        <TableColumn fx:id="colHistoriaClinica" text="N° Historia" prefWidth="100"/>
+                        <TableColumn fx:id="colEdad" text="Edad" prefWidth="60"/>
+                        <TableColumn fx:id="colCiudad" text="Ciudad" prefWidth="120"/>
+                        <TableColumn fx:id="colPorcentaje" text="Completado (%)" prefWidth="100"/>
+                        <TableColumn fx:id="colRiesgo" text="Nivel de Riesgo" prefWidth="120"/>
+                        <TableColumn fx:id="colAcciones" text="Acciones" prefWidth="120"/>
                     </columns>
                 </TableView>
             </VBox>
